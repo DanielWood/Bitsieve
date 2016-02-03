@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     double multi = 1.2f;
     if (argc > 2)
     {
-    multi = fabs(strtod(argv[2], NULL));
+        multi = fabs(strtod(argv[2], NULL));
         if (multi == .0f)
         {
             fprintf(stderr, "Invalid float value: \"%s\"\n", argv[2]);
