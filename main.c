@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
     for (i = 3; i < n; i += 2)
     {
         j = floor((float)i * _1_bits);
-        nbuf[j] &= ~(1 << i % 32);
+        nbuf[j] &= ~(1 << (i & 31));
     }
 
     // Cross out the rest
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
         j = floor((float)i * _1_bits);   // j = current byte
 
         // Check bit
-        if ((nbuf[j] >> i % 32) & 1)
+        if ((nbuf[j] >> (i & 31)) & 1)
         {
             // Unset all multiples
             k = i + (i + 1);             // k = multiples of i
@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
                 j = floor((float)k * _1_bits);
 
                 // Unset bit
-                nbuf[j] &= ~(1 << k % 32);
+                nbuf[j] &= ~(1 << (k & 31));
             }
         }
     }
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
     for (i = j = k = 0; i < n; i++)
     {
         j = floor((float)i * _1_bits);
-        if ((nbuf[j] >> i % 32) & 1)
+        if ((nbuf[j] >> (i & 31)) & 1)
         {
             primes[k++] = i + 1;
 
